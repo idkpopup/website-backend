@@ -1,0 +1,19 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+        nodejs: 10
+  build:
+    commands:
+      - echo "npm install time"
+      - npm install time
+      - echo "npm install"
+      - npm install
+      - echo '"cloud formation"'
+      - aws cloudformation package --template-file template.yml --s3-bucket idkpopup-website-deployment-artifacts --output-template-file outputtemplate.yml
+      - "echo done building"
+artifacts:
+  type: zip
+  files:
+    - template.yml
+    - outputtemplate.yml
